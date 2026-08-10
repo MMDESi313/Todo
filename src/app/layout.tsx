@@ -8,6 +8,7 @@ const vazirmatn = localFont({
   variable: "--vazirmatn",
   weight: "100 900",
   display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
