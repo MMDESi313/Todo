@@ -18,7 +18,7 @@ export default function DesktopNavLink({
       className={cn(
         "px-4 py-2 rounded-lg transition-colors text-sm",
         { "bg-muted text-foreground font-bold": path === href },
-        { "hover:bg-muted text-secondary font-medium": path !== href },
+        { "hover:bg-muted test-muted-foreground font-medium": path !== href },
       )}
     >
       {text}

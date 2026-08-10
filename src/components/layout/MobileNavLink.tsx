@@ -21,7 +21,7 @@ export default function MobileNavLink({
       className={cn(
         "flex flex-col items-center gap-1 p-2",
         { "text-primary": path === href },
-        { "text-secondary": path !== href },
+        { "test-muted-foreground": path !== href },
       )}
     >
       <Icon />
