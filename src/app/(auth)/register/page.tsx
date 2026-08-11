@@ -1,6 +1,7 @@
 import RegisterForm from "@/components/forms/RegisterForm";
 import Image from "next/image";
 import Link from "next/link";
+import Logo from "@/../public/logo.png";
 
 export default function RegisterPage() {
   return (
@@ -8,7 +9,7 @@ export default function RegisterPage() {
       <div className="flex flex-col items-center mb-8">
         <div className="w-16 h-16 flex items-center justify-center mb-4">
           <Image
-            src={"/logo.png"}
+            src={Logo}
             alt="لیست کارها"
             width={64}
             height={64}
