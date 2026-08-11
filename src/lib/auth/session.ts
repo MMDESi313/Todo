@@ -44,3 +44,14 @@ export const getCurrentUser = cache(async () => {
 
   return session.user;
 });
+
+export async function destroySession() {
+  const cookieStore = await cookies();
+  const sessionId = cookieStore.get(SESSION_COOKIE)?.value;
+
+  if (sessionId) {
+    await prisma.session.delete({ where: { id: sessionId } }).catch(() => {});
+  }
+
+  cookieStore.delete(SESSION_COOKIE);
+}

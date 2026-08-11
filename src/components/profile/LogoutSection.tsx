@@ -1,5 +1,5 @@
 import { LogOut } from "lucide-react";
-import LogoutForm from "../forms/LogoutForm";
+import LogoutConfirmation from "./LogoutConfirmation";
 
 function LogoutSection() {
   return (
@@ -16,7 +16,7 @@ function LogoutSection() {
             </p>
           </div>
         </div>
-        <LogoutForm />
+        <LogoutConfirmation />
       </div>
     </div>
   );

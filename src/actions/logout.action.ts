@@ -1,17 +1,9 @@
 "use server";
 
-import { prisma } from "@/lib/prisma";
-import { cookies } from "next/headers";
-
-const SESSION_COOKIE = "session_id";
+import { destroySession } from "@/lib/auth/session";
+import { redirect } from "next/navigation";
 
 export async function logoutAction() {
-  const cookieStore = await cookies();
-  const sessionId = cookieStore.get(SESSION_COOKIE)?.value;
-
-  if (sessionId) {
-    await prisma.session.delete({ where: { id: sessionId } }).catch(() => {});
-  }
-
-  cookieStore.delete(SESSION_COOKIE);
+  await destroySession();
+  redirect("/login");
 }
