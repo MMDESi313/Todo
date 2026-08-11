@@ -44,12 +44,26 @@
   --color-card: var(--card);
 
   --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
   --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
 
   --color-priority-high: var(--priority-high);
   --color-priority-medium: var(--priority-medium);
   --color-priority-low: var(--priority-low);
+
+  --color-tag-1: var(--tag-1);
+  --color-tag-2: var(--tag-2);
+  --color-tag-3: var(--tag-3);
+  --color-tag-4: var(--tag-4);
+  --color-tag-5: var(--tag-5);
+  --color-tag-6: var(--tag-6);
+  --color-tag-7: var(--tag-7);
+  --color-tag-8: var(--tag-8);
+  --color-tag-9: var(--tag-9);
+  --color-tag-10: var(--tag-10);
 
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
@@ -69,28 +83,47 @@
   --popover-foreground: #0f172a;
   --primary: #16a34a;
   --primary-foreground: #ffffff;
-  --secondary: #475569;
-  --secondary-foreground: #f8fafc;
+  --secondary: #e2e8f0;
+  --secondary-foreground: #0f172a;
   --muted: #f1f5f9;
   --muted-foreground: #64748b;
   --accent: #f1f5f9;
   --accent-foreground: #0f172a;
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
+
   --success: #16a34a;
+  --success-foreground: #ffffff;
   --warning: #d97706;
+  --warning-foreground: #451a03;
   --info: #2563eb;
+  --info-foreground: #ffffff;
+
   --priority-high: #dc2626;
   --priority-medium: #ca8a04;
   --priority-low: #15803d;
+
+  --tag-1: #be123c;
+  --tag-2: #c2410c;
+  --tag-3: #a16207;
+  --tag-4: #4d7c0f;
+  --tag-5: #166534;
+  --tag-6: #0f766e;
+  --tag-7: #0369a1;
+  --tag-8: #1d4ed8;
+  --tag-9: #6d28d9;
+  --tag-10: #be185d;
+
   --border: #e2e8f0;
   --input: #e2e8f0;
   --ring: #16a34a;
+
   --chart-1: #16a34a;
   --chart-2: #cbd5e1;
   --chart-3: #dc2626;
   --chart-4: #d97706;
-  --chart-5: #15803d;
+  --chart-5: #2563eb;
+
   --radius: 0.75rem;
   --sidebar: #ffffff;
   --sidebar-foreground: #0f172a;
@@ -119,20 +152,39 @@
   --accent-foreground: #fafafa;
   --destructive: #f87171;
   --destructive-foreground: #450a0a;
+
   --success: #22c55e;
+  --success-foreground: #052e16;
   --warning: #fbbf24;
+  --warning-foreground: #451a03;
   --info: #3b82f6;
+  --info-foreground: #ffffff;
+
   --priority-high: #f87171;
   --priority-medium: #fde047;
   --priority-low: #86efac;
+
+  --tag-1: #fca5a5;
+  --tag-2: #fdba74;
+  --tag-3: #fde047;
+  --tag-4: #bef264;
+  --tag-5: #86efac;
+  --tag-6: #5eead4;
+  --tag-7: #7dd3fc;
+  --tag-8: #93c5fd;
+  --tag-9: #c4b5fd;
+  --tag-10: #f9a8d4;
+
   --border: #27272a;
   --input: #27272a;
   --ring: #22c55e;
+
   --chart-1: #22c55e;
   --chart-2: #3f3f46;
   --chart-3: #f87171;
   --chart-4: #fbbf24;
-  --chart-5: #86efac;
+  --chart-5: #3b82f6;
+
   --sidebar: #18181b;
   --sidebar-foreground: #fafafa;
   --sidebar-primary: #22c55e;
