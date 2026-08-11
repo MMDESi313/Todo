@@ -1,6 +1,6 @@
 import * as z from "zod";
 
-export const passwordSchema = z
+const passwordSchema = z
   .string()
   .trim()
   .min(1, {
