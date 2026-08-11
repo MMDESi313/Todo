@@ -1,8 +1,8 @@
-import RegisterForm from "@/components/forms/RegisterForm";
+import LoginForm from "@/components/forms/LoginForm";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function RegisterPage() {
+export default function LoginPage() {
   return (
     <main className="min-h-dvh flex flex-col items-center justify-center p-4 transition-colors duration-300">
       <div className="w-full max-w-md">
@@ -18,18 +18,18 @@ export default function RegisterPage() {
           </div>
           <h1 className="text-3xl font-bold text-foreground">خوش آمدید</h1>
           <p className="text-muted-foreground mt-2 text-center">
-            برای ثبت نام در{" "}
+            برای ورود به{" "}
             <span className="text-primary font-semibold">لیست کارها</span>{" "}
             اطلاعات خود را وارد کنید.
           </p>
         </div>
         <div className="bg-card border border-border rounded-xl p-6 md:p-8 shadow-sm">
-          <RegisterForm />
+          <LoginForm />
         </div>
         <p className="text-center text-sm text-muted-foreground mt-6">
-          از قبل حساب کاربری دارید؟
-          <Link href="/login" className="font-semibold text-primary ms-1">
-            ورود
+          حساب کاربری ندارید؟
+          <Link href="/register" className="font-semibold text-primary ms-1">
+            ثبت نام
           </Link>
         </p>
       </div>
