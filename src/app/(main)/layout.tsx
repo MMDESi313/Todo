@@ -1,7 +1,11 @@
 import Header from "@/components/layout/Header";
 import MobileNav from "@/components/layout/MobileNav";
+import { getCurrentUser } from "@/lib/auth/session";
+import { redirect } from "next/navigation";
 
-export default function MainLayout({ children }: LayoutProps<"/">) {
+export default async function MainLayout({ children }: LayoutProps<"/">) {
+  const user = await getCurrentUser();
+  if (!user) redirect("/login");
   return (
     <>
       <Header />
