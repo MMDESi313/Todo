@@ -9,7 +9,7 @@ export default async function MainLayout({ children }: LayoutProps<"/">) {
   return (
     <>
       <Header />
-      <main className="max-w-7xl mx-auto p-4 md:p-8">{children}</main>
+      <main className="p-4 md:p-8">{children}</main>
       <MobileNav />
     </>
   );
