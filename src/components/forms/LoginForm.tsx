@@ -39,7 +39,7 @@ export default function LoginForm() {
                 {...field}
                 id={field.name}
                 aria-invalid={fieldState.invalid}
-                placeholder="نام کاربری برای خود بسازید"
+                placeholder="نام کاربری خود را وارد کنید"
                 autoComplete="username"
               />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
@@ -58,7 +58,7 @@ export default function LoginForm() {
                   id={field.name}
                   type={showPassword ? "text" : "password"}
                   aria-invalid={fieldState.invalid}
-                  placeholder="رمز عبور برای خود بسازید"
+                  placeholder="رمز عبور خود را وارد کنید"
                   className="pl-10"
                   autoComplete="current-password"
                 />

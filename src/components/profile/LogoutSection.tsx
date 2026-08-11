@@ -1,5 +1,5 @@
 import { LogOut } from "lucide-react";
-import { Button } from "../ui/button";
+import LogoutForm from "../forms/LogoutForm";
 
 function LogoutSection() {
   return (
@@ -16,15 +16,7 @@ function LogoutSection() {
             </p>
           </div>
         </div>
-        <form>
-          <Button
-            type="submit"
-            variant="ghost"
-            className="text-sm font-semibold text-destructive hover:text-destructive transition-colors px-4 py-2 rounded-lg cursor-pointer"
-          >
-            خروج
-          </Button>
-        </form>
+        <LogoutForm />
       </div>
     </div>
   );
