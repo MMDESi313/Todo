@@ -1,5 +1,6 @@
 import RegisterForm from "@/components/forms/RegisterForm";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function RegisterPage() {
   return (
@@ -18,13 +19,19 @@ export default function RegisterPage() {
           <h1 className="text-3xl font-bold text-foreground">خوش آمدید</h1>
           <p className="text-muted-foreground mt-2 text-center">
             برای ورود به{" "}
-            <span className="text-primary font-bold">لیست کارها</span> اطلاعات
-            خود را وارد کنید.
+            <span className="text-primary font-semibold">لیست کارها</span>{" "}
+            اطلاعات خود را وارد کنید.
           </p>
         </div>
         <div className="bg-card border border-border rounded-xl p-6 md:p-8 shadow-sm">
           <RegisterForm />
         </div>
+        <p className="text-center text-sm text-muted-foreground mt-6">
+          از قبل حساب کاربری دارید؟
+          <Link href="/login" className="font-semibold text-primary ms-1">
+            ورود
+          </Link>
+        </p>
       </div>
     </main>
   );
