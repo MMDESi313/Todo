@@ -85,6 +85,7 @@ export default function RegisterForm() {
                   aria-invalid={fieldState.invalid}
                   placeholder="رمز عبور برای خود بسازید"
                   className="pl-10"
+                  autoComplete="new-password"
                 />
                 <button
                   type="button"
@@ -121,6 +122,7 @@ export default function RegisterForm() {
                   aria-invalid={fieldState.invalid}
                   placeholder="تکرار رمز عبور را وارد کنید"
                   className="pl-9"
+                  autoComplete="new-password"
                 />
                 <button
                   type="button"
@@ -143,7 +145,18 @@ export default function RegisterForm() {
             </Field>
           )}
         />
-        <Button type="submit" className="font-bold">
+
+        {form.formState.errors.root && (
+          <p className="text-sm text-destructive text-center">
+            {form.formState.errors.root.message}
+          </p>
+        )}
+
+        <Button
+          type="submit"
+          disabled={form.formState.isSubmitting}
+          className="font-bold cursor-pointer"
+        >
           {form.formState.isSubmitting ? (
             <Loader2 className="animate-spin" size={16} />
           ) : (

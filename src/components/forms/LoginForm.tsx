@@ -9,6 +9,7 @@ import { useState } from "react";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { LoginFormData, loginFormSchema } from "@/schema/login.schema";
+import { loginAction } from "@/actions/login.action";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,8 +19,15 @@ export default function LoginForm() {
     defaultValues: { username: "", password: "" },
   });
 
+  async function onSubmit(data: LoginFormData) {
+    const result = await loginAction(data);
+    if (!result.success && result.formError) {
+      form.setError("root", { message: result.formError });
+    }
+  }
+
   return (
-    <form className="space-y-6" onSubmit={form.handleSubmit(() => {})}>
+    <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
       <FieldGroup>
         <Controller
           name="username"
@@ -52,6 +60,7 @@ export default function LoginForm() {
                   aria-invalid={fieldState.invalid}
                   placeholder="رمز عبور برای خود بسازید"
                   className="pl-10"
+                  autoComplete="current-password"
                 />
                 <button
                   type="button"
@@ -75,7 +84,17 @@ export default function LoginForm() {
           )}
         />
 
-        <Button type="submit" className="font-bold">
+        {form.formState.errors.root && (
+          <p className="text-sm text-destructive text-center">
+            {form.formState.errors.root.message}
+          </p>
+        )}
+
+        <Button
+          type="submit"
+          disabled={form.formState.isSubmitting}
+          className="font-bold cursor-pointer"
+        >
           {form.formState.isSubmitting ? (
             <Loader2 className="animate-spin" size={16} />
           ) : (
