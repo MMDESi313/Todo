@@ -41,6 +41,7 @@ export default function LoginForm() {
                 aria-invalid={fieldState.invalid}
                 placeholder="نام کاربری خود را وارد کنید"
                 autoComplete="username"
+                disabled={form.formState.isSubmitting}
               />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
@@ -61,11 +62,13 @@ export default function LoginForm() {
                   placeholder="رمز عبور خود را وارد کنید"
                   className="pl-10"
                   autoComplete="current-password"
+                  disabled={form.formState.isSubmitting}
                 />
                 <button
                   type="button"
                   className="absolute left-3 w-fit h-full cursor-pointer"
                   onClick={() => setShowPassword((prev) => !prev)}
+                  disabled={form.formState.isSubmitting}
                 >
                   {showPassword ? (
                     <Eye

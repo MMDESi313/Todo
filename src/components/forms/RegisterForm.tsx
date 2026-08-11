@@ -49,6 +49,7 @@ export default function RegisterForm() {
                 aria-invalid={fieldState.invalid}
                 placeholder="نام خود را وارد کنید"
                 autoComplete="name"
+                disabled={form.formState.isSubmitting}
               />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
@@ -66,6 +67,7 @@ export default function RegisterForm() {
                 aria-invalid={fieldState.invalid}
                 placeholder="نام کاربری برای خود بسازید"
                 autoComplete="username"
+                disabled={form.formState.isSubmitting}
               />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
@@ -86,11 +88,13 @@ export default function RegisterForm() {
                   placeholder="رمز عبور برای خود بسازید"
                   className="pl-10"
                   autoComplete="new-password"
+                  disabled={form.formState.isSubmitting}
                 />
                 <button
                   type="button"
                   className="absolute left-3 w-fit h-full cursor-pointer"
                   onClick={() => setShowPassword((prev) => !prev)}
+                  disabled={form.formState.isSubmitting}
                 >
                   {showPassword ? (
                     <Eye
@@ -123,11 +127,13 @@ export default function RegisterForm() {
                   placeholder="تکرار رمز عبور را وارد کنید"
                   className="pl-9"
                   autoComplete="new-password"
+                  disabled={form.formState.isSubmitting}
                 />
                 <button
                   type="button"
                   className="absolute left-3 w-fit h-full cursor-pointer"
                   onClick={() => setShowPasswordRetype((prev) => !prev)}
+                  disabled={form.formState.isSubmitting}
                 >
                   {showPasswordRetype ? (
                     <Eye
