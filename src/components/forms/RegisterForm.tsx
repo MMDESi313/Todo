@@ -7,8 +7,9 @@ import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useState } from "react";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { registerAction } from "@/actions/register.action";
 
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -19,8 +20,22 @@ export default function RegisterForm() {
     defaultValues: { name: "", username: "", password: "", passwordRetype: "" },
   });
 
+  async function onSubmit(data: RegisterFormData) {
+    const result = await registerAction(data);
+    if (!result.success) {
+      if (result.fieldErrors) {
+        for (const [field, message] of Object.entries(result.fieldErrors)) {
+          form.setError(field as keyof RegisterFormData, { message });
+        }
+      }
+      if (result.formError) {
+        form.setError("root", { message: result.formError });
+      }
+    }
+  }
+
   return (
-    <form className="space-y-6" onSubmit={form.handleSubmit(() => {})}>
+    <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
       <FieldGroup>
         <Controller
           name="name"
@@ -129,7 +144,11 @@ export default function RegisterForm() {
           )}
         />
         <Button type="submit" className="font-bold">
-          ثبت نام
+          {form.formState.isSubmitting ? (
+            <Loader2 className="animate-spin" size={16} />
+          ) : (
+            "ثبت نام"
+          )}
         </Button>
       </FieldGroup>
     </form>
