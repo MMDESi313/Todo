@@ -1,6 +1,6 @@
 import * as z from "zod";
 
-const passwordSchema = z
+export const passwordSchema = z
   .string()
   .trim()
   .min(1, {
@@ -13,23 +13,25 @@ const passwordSchema = z
     error: "رمز عبور نمیتواند کمتر از ۸ کاراکتر داشته باشد",
   });
 
+export const usernameSchema = z
+  .string()
+  .trim()
+  .min(1, {
+    error: "نام کاربری نمیتواند خالی باشد",
+  })
+  .regex(/^[A-Za-z0-9]+$/, {
+    error: "نام کاربری باید فقط شامل حروف انگلیسی و اعداد باشد",
+  })
+  .min(5, {
+    error: "نام کاربری نمیتواند کمتر از ۵ کاراکتر داشته باشد",
+  });
+
 export const registerFormSchema = z
   .object({
     name: z.string().trim().min(1, {
       error: "نام نمیتواند خالی باشد",
     }),
-    username: z
-      .string()
-      .trim()
-      .min(1, {
-        error: "نام کاربری نمیتواند خالی باشد",
-      })
-      .regex(/^[A-Za-z0-9]+$/, {
-        error: "نام کاربری باید فقط شامل حروف انگلیسی و اعداد باشد",
-      })
-      .min(5, {
-        error: "نام کاربری نمیتواند کمتر از ۵ کاراکتر داشته باشد",
-      }),
+    username: usernameSchema,
     password: passwordSchema,
     passwordRetype: z.string().trim(),
   })
