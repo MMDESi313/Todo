@@ -11,8 +11,17 @@ import {
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
 import LogoutButton from "./LogoutButton";
+import { useActionState, useEffect } from "react";
+import { toast } from "sonner";
 
 export default function LogoutConfirmation() {
+  const [state, formAction] = useActionState(logoutAction, null);
+  useEffect(() => {
+    if (state?.success === false) {
+      toast.error(state.formError);
+    }
+  }, [state]);
+
   return (
     <AlertDialog>
       <AlertDialogTrigger className="text-sm font-semibold text-destructive hover:bg-muted transition-colors px-4 py-2 rounded-lg cursor-pointer">
@@ -31,8 +40,8 @@ export default function LogoutConfirmation() {
           >
             انصراف
           </AlertDialogCancel>
-          <form action={logoutAction}>
-            <LogoutButton/>
+          <form action={formAction}>
+            <LogoutButton />
           </form>
         </AlertDialogFooter>
       </AlertDialogContent>

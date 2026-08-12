@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "@/components/providers/ThemeProvider";
+import { AppToaster } from "@/components/AppToaster";
 
 const vazirmatn = localFont({
   src: "../../public/fonts/Vazirmatn[wght].woff2",
@@ -25,7 +26,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background">
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <AppToaster />
+        </Providers>
       </body>
     </html>
   );

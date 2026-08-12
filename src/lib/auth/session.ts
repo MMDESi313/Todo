@@ -50,7 +50,7 @@ export async function destroySession() {
   const sessionId = cookieStore.get(SESSION_COOKIE)?.value;
 
   if (sessionId) {
-    await prisma.session.delete({ where: { id: sessionId } }).catch(() => {});
+    await prisma.session.deleteMany({ where: { id: sessionId } });
   }
 
   cookieStore.delete(SESSION_COOKIE);
