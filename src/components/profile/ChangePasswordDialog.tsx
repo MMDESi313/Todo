@@ -1,6 +1,6 @@
 "use client";
 
-import { Edit, Loader2 } from "lucide-react";
+import { Edit, Loader2, Lock } from "lucide-react";
 import { Button } from "../ui/button";
 import {
   Dialog,
@@ -13,45 +13,40 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { useState } from "react";
-import EditProfileInfoForm from "../forms/EditProfileInfoForm";
 import { FormProvider, useForm } from "react-hook-form";
-import {
-  EditProfileFormData,
-  editProfileSchema,
-} from "@/schema/profile.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { editProfileAction } from "@/actions/editProfile.action";
+import {
+  ChangePasswordFormData,
+  changePasswordSchema,
+} from "@/schema/changePassword.schema";
+import ChangePasswordForm from "../forms/ChangePasswordForm";
 
-export default function EditProfileInfoDialog({
-  username,
-  name,
-}: {
-  username: string;
-  name: string;
-}) {
+export default function ChangePasswordDialog() {
   const [open, setOpen] = useState(false);
 
-  const form = useForm<EditProfileFormData>({
-    resolver: zodResolver(editProfileSchema),
-    defaultValues: { name, username },
+  const form = useForm<ChangePasswordFormData>({
+    resolver: zodResolver(changePasswordSchema),
+    defaultValues: {
+      currentPassword: "",
+      newPassword: "",
+      newPasswordRetype: "",
+    },
   });
 
-  async function onSubmit(data: EditProfileFormData) {
-    const result = await editProfileAction(data);
-
-    if (!result.success) {
-      if (result.fieldErrors) {
-        for (const [field, message] of Object.entries(result.fieldErrors)) {
-          form.setError(field as keyof EditProfileFormData, { message });
-        }
-      }
-      if (result.formError) {
-        form.setError("root", { message: result.formError });
-      }
-      return;
-    }
-
-    setOpen(false);
+  async function onSubmit(data: ChangePasswordFormData) {
+    // const result = await editProfileAction(data);
+    // if (!result.success) {
+    //   if (result.fieldErrors) {
+    //     for (const [field, message] of Object.entries(result.fieldErrors)) {
+    //       form.setError(field as keyof EditProfileFormData, { message });
+    //     }
+    //   }
+    //   if (result.formError) {
+    //     form.setError("root", { message: result.formError });
+    //   }
+    //   return;
+    // }
+    // setOpen(false);
   }
 
   return (
@@ -66,23 +61,23 @@ export default function EditProfileInfoDialog({
         render={() => (
           <Button
             variant="outline"
-            className="flex items-center justify-center gap-2 w-full h-11 rounded-lg text-foreground font-semibold text-sm transition-colors px-4 cursor-pointer"
+            className="flex items-center justify-center gap-2 w-full h-11 rounded-lg text-foreground font-semibold text-sm transition-colors px-4"
             onClick={() => setOpen(true)}
           >
-            <Edit size={16} />
-            ویرایش اطلاعات
+            <Lock size={16} />
+            تغییر رمز عبور
           </Button>
         )}
       />
       <DialogContent showCloseButton={false}>
         <DialogHeader>
-          <DialogTitle>ویرایش</DialogTitle>
+          <DialogTitle>تغییر رمز عبور</DialogTitle>
           <DialogDescription>
-            اطلاعات را وارد کنید و روی «ذخیره» بزنید
+            اطلاعات را وارد کنید و روی «تایید» بزنید
           </DialogDescription>
         </DialogHeader>
         <FormProvider {...form}>
-          <EditProfileInfoForm onSubmit={form.handleSubmit(onSubmit)} />
+          <ChangePasswordForm onSubmit={form.handleSubmit(onSubmit)} />
         </FormProvider>
         <DialogFooter>
           <DialogClose
@@ -100,14 +95,14 @@ export default function EditProfileInfoDialog({
           />
           <Button
             type="submit"
-            form="update-profile-form"
+            form="change-password-form"
             className="min-w-20 cursor-pointer"
             disabled={form.formState.isSubmitting}
           >
             {form.formState.isSubmitting ? (
               <Loader2 className="animate-spin" size={16} />
             ) : (
-              "ذخیره"
+              "تایید"
             )}
           </Button>
         </DialogFooter>
