@@ -1,6 +1,6 @@
 "use client";
 
-import { Edit, Loader2, Lock } from "lucide-react";
+import { Loader2, Lock } from "lucide-react";
 import { Button } from "../ui/button";
 import {
   Dialog,
@@ -20,6 +20,7 @@ import {
   changePasswordSchema,
 } from "@/schema/changePassword.schema";
 import ChangePasswordForm from "../forms/ChangePasswordForm";
+import { changePasswordAction } from "@/actions/changePassword.action";
 
 export default function ChangePasswordDialog() {
   const [open, setOpen] = useState(false);
@@ -34,19 +35,19 @@ export default function ChangePasswordDialog() {
   });
 
   async function onSubmit(data: ChangePasswordFormData) {
-    // const result = await editProfileAction(data);
-    // if (!result.success) {
-    //   if (result.fieldErrors) {
-    //     for (const [field, message] of Object.entries(result.fieldErrors)) {
-    //       form.setError(field as keyof EditProfileFormData, { message });
-    //     }
-    //   }
-    //   if (result.formError) {
-    //     form.setError("root", { message: result.formError });
-    //   }
-    //   return;
-    // }
-    // setOpen(false);
+    const result = await changePasswordAction(data);
+    if (!result.success) {
+      if (result.fieldErrors) {
+        for (const [field, message] of Object.entries(result.fieldErrors)) {
+          form.setError(field as keyof ChangePasswordFormData, { message });
+        }
+      }
+      if (result.formError) {
+        form.setError("root", { message: result.formError });
+      }
+      return;
+    }
+    setOpen(false);
   }
 
   return (
