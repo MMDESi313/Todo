@@ -72,7 +72,7 @@ export default function ChangePasswordForm({
                   aria-invalid={fieldState.invalid}
                   placeholder="رمز عبور جدید خود را وارد کنید"
                   className="pl-10"
-                  autoComplete="current-password"
+                  autoComplete="new-password"
                   disabled={formState.isSubmitting}
                 />
                 <button
@@ -111,7 +111,7 @@ export default function ChangePasswordForm({
                   aria-invalid={fieldState.invalid}
                   placeholder="تکرار رمز عبور جدید خود را وارد کنید"
                   className="pl-10"
-                  autoComplete="current-password"
+                  autoComplete="new-password"
                   disabled={formState.isSubmitting}
                 />
                 <button

@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
 import { cache } from "react";
 
-const SESSION_COOKIE = "session_id";
+export const SESSION_COOKIE = "session_id";
 const SESSION_DURATION_DAYS = 7;
 
 export async function createSession(userId: string) {

@@ -1,9 +1,11 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { getCurrentUser } from "@/lib/auth/session";
+import { getCurrentUser, SESSION_COOKIE } from "@/lib/auth/session";
 import { hashPassword, verifyPassword } from "@/lib/auth/password";
 import { changePasswordSchema } from "@/schema/changePassword.schema";
+import { cookies } from "next/headers";
+
 
 type ChangePasswordResult =
   | { success: true }
@@ -39,11 +41,20 @@ export async function changePasswordAction(
   }
 
   const hashed = await hashPassword(newPassword);
+  const currentSessionId = (await cookies()).get(SESSION_COOKIE)?.value;
 
-  await prisma.user.update({
-    where: { id: user.id },
-    data: { password: hashed },
-  });
+  await prisma.$transaction([
+    prisma.user.update({
+      where: { id: user.id },
+      data: { password: hashed },
+    }),
+    prisma.session.deleteMany({
+      where: {
+        userId: user.id,
+        ...(currentSessionId ? { id: { not: currentSessionId } } : {}),
+      },
+    }),
+  ]);
 
   return { success: true };
 }

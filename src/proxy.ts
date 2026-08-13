@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { SESSION_COOKIE } from "./lib/auth/session";
 
-const SESSION_COOKIE = "session_id";
 const AUTH_PATHS = ["/login", "/register"];
 
 export default function proxy(request: NextRequest) {

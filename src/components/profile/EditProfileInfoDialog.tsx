@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EditProfileInfoForm from "../forms/EditProfileInfoForm";
 import { FormProvider, useForm } from "react-hook-form";
 import {
@@ -53,6 +53,12 @@ export default function EditProfileInfoDialog({
 
     setOpen(false);
   }
+
+  useEffect(() => {
+    if (open) {
+      form.reset();
+    }
+  }, [open, form]);
 
   return (
     <Dialog
