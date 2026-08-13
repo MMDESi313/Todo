@@ -24,7 +24,8 @@ export const usernameSchema = z
   })
   .min(5, {
     error: "نام کاربری نمیتواند کمتر از ۵ کاراکتر داشته باشد",
-  });
+  })
+  .transform((val) => val.toLowerCase());
 
 export const registerFormSchema = z
   .object({
