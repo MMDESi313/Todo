@@ -21,6 +21,7 @@ import {
 } from "@/schema/changePassword.schema";
 import ChangePasswordForm from "../forms/ChangePasswordForm";
 import { changePasswordAction } from "@/actions/changePassword.action";
+import { toast } from "sonner";
 
 export default function ChangePasswordDialog() {
   const [open, setOpen] = useState(false);
@@ -48,6 +49,7 @@ export default function ChangePasswordDialog() {
       return;
     }
     setOpen(false);
+    toast.success("رمز عبور شما با موفقیت تغییر یافت");
   }
 
   useEffect(() => {

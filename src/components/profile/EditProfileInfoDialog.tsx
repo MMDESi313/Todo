@@ -21,6 +21,7 @@ import {
 } from "@/schema/profile.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { editProfileAction } from "@/actions/editProfile.action";
+import { toast } from "sonner";
 
 export default function EditProfileInfoDialog({
   username,
@@ -52,13 +53,14 @@ export default function EditProfileInfoDialog({
     }
 
     setOpen(false);
+    toast.success("اطلاعات حساب شما با موفقیت تغییر یافت");
   }
 
   useEffect(() => {
     if (open) {
-      form.reset();
+      form.reset({ name, username });
     }
-  }, [open, form]);
+  }, [open, form, name, username]);
 
   return (
     <Dialog
