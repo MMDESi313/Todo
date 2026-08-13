@@ -1,6 +1,6 @@
 "use client";
 
-import { Edit } from "lucide-react";
+import { Edit, Loader2 } from "lucide-react";
 import { Button } from "../ui/button";
 import {
   Dialog,
@@ -14,6 +14,13 @@ import {
 } from "../ui/dialog";
 import { useState } from "react";
 import EditProfileInfoForm from "../forms/EditProfileInfoForm";
+import { FormProvider, useForm } from "react-hook-form";
+import {
+  EditProfileFormData,
+  editProfileSchema,
+} from "@/schema/profile.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { editProfileAction } from "@/actions/editProfile.action";
 
 export default function EditProfileInfoDialog({
   username,
@@ -23,8 +30,38 @@ export default function EditProfileInfoDialog({
   name: string;
 }) {
   const [open, setOpen] = useState(false);
+
+  const form = useForm<EditProfileFormData>({
+    resolver: zodResolver(editProfileSchema),
+    defaultValues: { name, username },
+  });
+
+  async function onSubmit(data: EditProfileFormData) {
+    const result = await editProfileAction(data);
+
+    if (!result.success) {
+      if (result.fieldErrors) {
+        for (const [field, message] of Object.entries(result.fieldErrors)) {
+          form.setError(field as keyof EditProfileFormData, { message });
+        }
+      }
+      if (result.formError) {
+        form.setError("root", { message: result.formError });
+      }
+      return;
+    }
+
+    setOpen(false);
+  }
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog
+      open={open}
+      onOpenChange={(nextOpen) => {
+        if (form.formState.isSubmitting) return;
+        setOpen(nextOpen);
+      }}
+    >
       <DialogTrigger
         render={() => (
           <Button
@@ -37,14 +74,16 @@ export default function EditProfileInfoDialog({
           </Button>
         )}
       />
-      <DialogContent>
+      <DialogContent showCloseButton={false}>
         <DialogHeader>
           <DialogTitle>ویرایش</DialogTitle>
           <DialogDescription>
             اطلاعات را وارد کنید و روی «ذخیره» بزنید
           </DialogDescription>
         </DialogHeader>
-        <EditProfileInfoForm name={name} username={username} />
+        <FormProvider {...form}>
+          <EditProfileInfoForm onSubmit={form.handleSubmit(onSubmit)} />
+        </FormProvider>
         <DialogFooter>
           <DialogClose
             render={() => (
@@ -53,6 +92,7 @@ export default function EditProfileInfoDialog({
                 variant="outline"
                 onClick={() => setOpen(false)}
                 className="min-w-20 cursor-pointer"
+                disabled={form.formState.isSubmitting}
               >
                 انصراف
               </Button>
@@ -62,8 +102,13 @@ export default function EditProfileInfoDialog({
             type="submit"
             form="update-profile-form"
             className="min-w-20 cursor-pointer"
+            disabled={form.formState.isSubmitting}
           >
-            ذخیره
+            {form.formState.isSubmitting ? (
+              <Loader2 className="animate-spin" size={16} />
+            ) : (
+              "ورود"
+            )}
           </Button>
         </DialogFooter>
       </DialogContent>

@@ -1,29 +1,21 @@
-import {
-  EditProfileFormData,
-  editProfileSchema,
-} from "@/schema/profile.schema";
-import { NumberFieldGroup } from "@base-ui/react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, useForm } from "react-hook-form";
+import { EditProfileFormData } from "@/schema/profile.schema";
+import { Controller, useFormContext } from "react-hook-form";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 
-export default function EditProfileInfoForm(defaultValue: EditProfileFormData) {
-  const form = useForm<EditProfileFormData>({
-    resolver: zodResolver(editProfileSchema),
-    defaultValues: { name: defaultValue.name, username: defaultValue.username },
-  });
+export default function EditProfileInfoForm({
+  onSubmit,
+}: {
+  onSubmit: (e: React.BaseSyntheticEvent) => void;
+}) {
+  const { control, formState } = useFormContext<EditProfileFormData>();
 
   return (
-    <form
-      id="update-profile-form"
-      className="space-y-6"
-      onSubmit={form.handleSubmit(() => {})}
-    >
+    <form id="update-profile-form" className="space-y-6" onSubmit={onSubmit}>
       <FieldGroup>
         <Controller
           name="name"
-          control={form.control}
+          control={control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor={field.name}>نام</FieldLabel>
@@ -33,7 +25,7 @@ export default function EditProfileInfoForm(defaultValue: EditProfileFormData) {
                 aria-invalid={fieldState.invalid}
                 placeholder="نام خود را وارد کنید"
                 autoComplete="name"
-                disabled={form.formState.isSubmitting}
+                disabled={formState.isSubmitting}
               />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
@@ -41,7 +33,7 @@ export default function EditProfileInfoForm(defaultValue: EditProfileFormData) {
         />
         <Controller
           name="username"
-          control={form.control}
+          control={control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor={field.name}>نام کاربری</FieldLabel>
@@ -51,12 +43,17 @@ export default function EditProfileInfoForm(defaultValue: EditProfileFormData) {
                 aria-invalid={fieldState.invalid}
                 placeholder="نام کاربری برای خود بسازید"
                 autoComplete="username"
-                disabled={form.formState.isSubmitting}
+                disabled={formState.isSubmitting}
               />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
           )}
         />
+        {formState.errors.root && (
+          <p className="text-sm text-destructive text-center">
+            {formState.errors.root.message}
+          </p>
+        )}
       </FieldGroup>
     </form>
   );
