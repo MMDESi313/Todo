@@ -3,6 +3,7 @@
 import { Edit, Trash2 } from "lucide-react";
 import { Tag } from "@prisma/client";
 import { Button } from "../ui/button";
+import EditTagDialog from "./EditTagDialog";
 
 export default function TagCard({ tag }: { tag: Tag }) {
   return (
@@ -18,9 +19,7 @@ export default function TagCard({ tag }: { tag: Tag }) {
         <span className="font-semibold text-foreground">{tag.name}</span>
       </div>
       <div className="flex items-center gap-1">
-        <Button variant="ghost" className="w-9 h-9">
-          <Edit size={16} />
-        </Button>
+        <EditTagDialog tag={tag} />
         <Button variant="ghost" className="w-9 h-9">
           <Trash2 size={16} />
         </Button>
