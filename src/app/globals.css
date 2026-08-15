@@ -103,16 +103,27 @@
   --priority-medium: #ca8a04;
   --priority-low: #15803d;
 
-  --tag-1: #be123c;
-  --tag-2: #c2410c;
-  --tag-3: #a16207;
-  --tag-4: #4d7c0f;
-  --tag-5: #166534;
-  --tag-6: #0f766e;
-  --tag-7: #0369a1;
-  --tag-8: #1d4ed8;
-  --tag-9: #6d28d9;
-  --tag-10: #be185d;
+  --tag-1: #ef5350;
+  --tag-2: #ff9800;
+  --tag-3: #fdd835;
+  --tag-4: #c0ca33;
+  --tag-5: #66bb6a;
+  --tag-6: #26a69a;
+  --tag-7: #29b6f6;
+  --tag-8: #5c6bc0;
+  --tag-9: #ab47bc;
+  --tag-10: #ec407a;
+
+  --tag-1-bg: #ef535020;
+  --tag-2-bg: #ff980020;
+  --tag-3-bg: #fdd83520;
+  --tag-4-bg: #c0ca3320;
+  --tag-5-bg: #66bb6a20;
+  --tag-6-bg: #26a69a20;
+  --tag-7-bg: #29b6f620;
+  --tag-8-bg: #5c6bc020;
+  --tag-9-bg: #ab47bc20;
+  --tag-10-bg: #ec407a20;
 
   --border: #e2e8f0;
   --input: #e2e8f0;
@@ -180,16 +191,27 @@
   --priority-medium: #fde047;
   --priority-low: #86efac;
 
-  --tag-1: #fca5a5;
-  --tag-2: #fdba74;
-  --tag-3: #fde047;
-  --tag-4: #bef264;
-  --tag-5: #86efac;
-  --tag-6: #5eead4;
-  --tag-7: #7dd3fc;
-  --tag-8: #93c5fd;
-  --tag-9: #c4b5fd;
-  --tag-10: #f9a8d4;
+  --tag-1: #f87171;
+  --tag-2: #fb923c;
+  --tag-3: #facc15;
+  --tag-4: #a3e635;
+  --tag-5: #4ade80;
+  --tag-6: #2dd4bf;
+  --tag-7: #38bdf8;
+  --tag-8: #818cf8;
+  --tag-9: #c084fc;
+  --tag-10: #f472b6;
+
+  --tag-1-bg: #f8717120;
+  --tag-2-bg: #fb923c20;
+  --tag-3-bg: #facc1520;
+  --tag-4-bg: #a3e63520;
+  --tag-5-bg: #4ade8020;
+  --tag-6-bg: #2dd4bf20;
+  --tag-7-bg: #38bdf820;
+  --tag-8-bg: #818cf820;
+  --tag-9-bg: #c084fc20;
+  --tag-10-bg: #f472b620;
 
   --border: #27272a;
   --input: #27272a;

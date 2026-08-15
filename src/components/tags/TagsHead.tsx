@@ -1,5 +1,4 @@
-import { Plus } from "lucide-react";
-import { Button } from "../ui/button";
+import AddTagDialog from "./AddTagDialog";
 
 export default function TagsHead() {
   return (
@@ -9,10 +8,7 @@ export default function TagsHead() {
           برچسب ها
         </h1>
       </div>
-      <Button className="flex items-center gap-2 font-semibold text-sm h-9 px-4 rounded-lg shadow-sm transition-colors">
-        <span className="hidden sm:inline">افزودن برچسب</span>
-        <Plus size={18} />
-      </Button>
+      <AddTagDialog />
     </div>
   );
 }

@@ -5,8 +5,13 @@ export const tagSchema = z.object({
     .string()
     .trim()
     .min(1, { error: "نام برچسب نمیتواند خالی باشد" })
+    .max(30, { error: "نام برچسب نمیتواند بیش از ۳۰ کاراکتر باشد" })
     .transform((val) => val.toLowerCase()),
-  color: z.number().int().min(1).max(10),
+  color: z
+    .number()
+    .int()
+    .min(1, { error: "یکی از حالت‌های موجود باید انتخاب شود" })
+    .max(10, { error: "یکی از حالت‌های موجود باید انتخاب شود" }),
 });
 
 export type TagFormData = z.infer<typeof tagSchema>;
