@@ -22,6 +22,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { editProfileAction } from "@/actions/editProfile.action";
 import { toast } from "sonner";
+import { Separator } from "../ui/separator";
 
 export default function EditProfileInfoDialog({
   username,
@@ -89,6 +90,7 @@ export default function EditProfileInfoDialog({
             اطلاعات را وارد کنید و روی «ذخیره» بزنید
           </DialogDescription>
         </DialogHeader>
+        <Separator />
         <FormProvider {...form}>
           <EditProfileInfoForm onSubmit={form.handleSubmit(onSubmit)} />
         </FormProvider>

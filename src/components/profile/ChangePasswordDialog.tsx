@@ -22,6 +22,7 @@ import {
 import ChangePasswordForm from "../forms/ChangePasswordForm";
 import { changePasswordAction } from "@/actions/changePassword.action";
 import { toast } from "sonner";
+import { Separator } from "../ui/separator";
 
 export default function ChangePasswordDialog() {
   const [open, setOpen] = useState(false);
@@ -85,6 +86,7 @@ export default function ChangePasswordDialog() {
             اطلاعات را وارد کنید و روی «تایید» بزنید
           </DialogDescription>
         </DialogHeader>
+        <Separator />
         <FormProvider {...form}>
           <ChangePasswordForm onSubmit={form.handleSubmit(onSubmit)} />
         </FormProvider>
