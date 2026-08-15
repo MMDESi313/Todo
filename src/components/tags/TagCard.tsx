@@ -1,9 +1,6 @@
-"use client";
-
-import { Edit, Trash2 } from "lucide-react";
 import { Tag } from "@prisma/client";
-import { Button } from "../ui/button";
 import EditTagDialog from "./EditTagDialog";
+import DeleteTagConfirmation from "./DeleteTagConfirmation";
 
 export default function TagCard({ tag }: { tag: Tag }) {
   return (
@@ -20,9 +17,7 @@ export default function TagCard({ tag }: { tag: Tag }) {
       </div>
       <div className="flex items-center gap-1">
         <EditTagDialog tag={tag} />
-        <Button variant="ghost" className="w-9 h-9">
-          <Trash2 size={16} />
-        </Button>
+        <DeleteTagConfirmation tagId={tag.id} tagName={tag.name} />
       </div>
     </div>
   );
