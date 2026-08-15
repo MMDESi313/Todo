@@ -6,15 +6,17 @@ import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import TagColorPicker from "../tags/TagColorPicker";
 
-export default function AddTagForm({
+export default function TagForm({
   onSubmit,
+  formId,
 }: {
   onSubmit: (e: React.BaseSyntheticEvent) => void;
+  formId: string;
 }) {
   const { control, formState } = useFormContext<TagFormData>();
 
   return (
-    <form id="add-tag-form" className="space-y-6" onSubmit={onSubmit}>
+    <form id={formId} className="space-y-6" onSubmit={onSubmit}>
       <FieldGroup>
         <Controller
           name="name"

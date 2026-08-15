@@ -17,7 +17,7 @@ import {
 } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { Loader2, Plus } from "lucide-react";
-import AddTagForm from "../forms/AddTagForm";
+import TagForm from "../forms/TagForm";
 import { Separator } from "../ui/separator";
 import TagPreview from "./TagPreview";
 
@@ -90,7 +90,10 @@ export default function AddTagDialog() {
         </DialogHeader>
         <Separator />
         <FormProvider {...form}>
-          <AddTagForm onSubmit={form.handleSubmit(onSubmit)} />
+          <TagForm
+            onSubmit={form.handleSubmit(onSubmit)}
+            formId="add-tag-form"
+          />
         </FormProvider>
         <Separator />
         <TagPreview color={tagColor} name={tagName} />
