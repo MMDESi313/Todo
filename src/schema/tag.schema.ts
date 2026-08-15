@@ -5,7 +5,7 @@ export const tagSchema = z.object({
     .string()
     .trim()
     .min(1, { error: "نام برچسب نمیتواند خالی باشد" })
-    .max(30, { error: "نام برچسب نمیتواند بیش از ۳۰ کاراکتر باشد" })
+    .max(25, { error: "نام برچسب نمیتواند بیش از ۲۵ کاراکتر باشد" })
     .transform((val) => val.toLowerCase()),
   color: z
     .number()
