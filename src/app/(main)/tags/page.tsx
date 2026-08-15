@@ -1,3 +1,4 @@
+import EmptyTagsState from "@/components/tags/EmptyTagsState";
 import TagCard from "@/components/tags/TagCard";
 import TagsHead from "@/components/tags/TagsHead";
 import { getCurrentUser } from "@/lib/auth/session";
@@ -8,12 +9,10 @@ export default async function TagsPage() {
   const tags = await getUserTags(user!.id);
 
   return (
-    <div className="max-w-5xl mx-auto">
+    <div className="max-w-5xl mx-auto h-full">
       <TagsHead />
       {tags.length === 0 ? (
-        <p className="text-muted-foreground text-center mt-12">
-          هنوز برچسبی نساخته‌اید
-        </p>
+        <EmptyTagsState />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {tags.map((tag) => (
