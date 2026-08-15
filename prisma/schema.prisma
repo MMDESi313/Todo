@@ -61,9 +61,10 @@ model Task {
 }
 
 model Tag {
-  id    String @id @default(cuid())
-  name  String
-  color Int
+  id        String   @id @default(cuid())
+  name      String
+  color     Int
+  createdAt DateTime @default(now())
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
