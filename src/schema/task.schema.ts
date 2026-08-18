@@ -15,7 +15,7 @@ export const taskSchema = z.object({
   dueAt: z.date().refine((date) => date >= new Date(), {
     error: "تاریخ سررسید نمی‌تواند در گذشته باشد",
   }),
-  tagIds: z.array(z.string()).default([]),
+  tagIds: z.array(z.string()),
 });
 
 export type TaskFormData = z.infer<typeof taskSchema>;
