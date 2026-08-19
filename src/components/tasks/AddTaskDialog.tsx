@@ -12,14 +12,14 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { TaskFormData, taskSchema } from "@/schema/task.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../ui/button";
 import { Loader2, Plus } from "lucide-react";
 import { addTaskAction } from "@/actions/addTask.action";
-import { toast } from "sonner";
 import { Separator } from "../ui/separator";
+import AddTaskForm from "../forms/AddTaskForm";
 
 function AddTaskDialog({ tags }: { tags: Tag[] }) {
   const [open, setOpen] = useState(false);
@@ -28,7 +28,7 @@ function AddTaskDialog({ tags }: { tags: Tag[] }) {
     defaultValues: {
       title: "",
       description: "",
-      dueAt: undefined,
+      dueAt: new Date(),
       priority: "MEDIUM",
       tagIds: [],
     },
@@ -48,7 +48,6 @@ function AddTaskDialog({ tags }: { tags: Tag[] }) {
       }
       return;
     }
-    toast.success("وظیفه اضافه شد");
     setOpen(false);
   }
 
@@ -77,7 +76,7 @@ function AddTaskDialog({ tags }: { tags: Tag[] }) {
       />
       <DialogContent
         showCloseButton={false}
-        className="max-h-[90vh] overflow-y-auto"
+        className="max-h-[90vh] overflow-y-auto scrollbar-none"
       >
         <DialogHeader>
           <DialogTitle>افزودن وظیفه</DialogTitle>
@@ -86,7 +85,9 @@ function AddTaskDialog({ tags }: { tags: Tag[] }) {
           </DialogDescription>
         </DialogHeader>
         <Separator />
-        {/* form */}
+        <FormProvider {...form}>
+          <AddTaskForm tags={tags} onSubmit={form.handleSubmit(onSubmit)} />
+        </FormProvider>
         <DialogFooter>
           <DialogClose
             render={() => (
