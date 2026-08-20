@@ -10,17 +10,19 @@ import TaskDueDatePicker from "../tasks/TaskDueDatePicker";
 import TaskTagPicker from "../tasks/TaskTagPicker";
 import TaskPrioritySelector from "../tasks/TaskPioritySelector";
 
-export default function AddTaskForm({
+export default function TaskForm({
   tags,
   onSubmit,
+  formId,
 }: {
   tags: Tag[];
   onSubmit: (e: React.BaseSyntheticEvent) => void;
+  formId: string;
 }) {
   const { control, formState } = useFormContext<TaskFormData>();
 
   return (
-    <form id="add-task-form" className="space-y-6" onSubmit={onSubmit}>
+    <form id={formId} className="space-y-6" onSubmit={onSubmit}>
       <FieldGroup>
         <Controller
           name="title"

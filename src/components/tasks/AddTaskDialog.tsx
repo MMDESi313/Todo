@@ -19,7 +19,7 @@ import { Button } from "../ui/button";
 import { Loader2, Plus } from "lucide-react";
 import { addTaskAction } from "@/actions/addTask.action";
 import { Separator } from "../ui/separator";
-import AddTaskForm from "../forms/AddTaskForm";
+import AddTaskForm from "../forms/TaskForm";
 
 function AddTaskDialog({ tags }: { tags: Tag[] }) {
   const [open, setOpen] = useState(false);
@@ -86,7 +86,11 @@ function AddTaskDialog({ tags }: { tags: Tag[] }) {
         </DialogHeader>
         <Separator />
         <FormProvider {...form}>
-          <AddTaskForm tags={tags} onSubmit={form.handleSubmit(onSubmit)} />
+          <AddTaskForm
+            tags={tags}
+            onSubmit={form.handleSubmit(onSubmit)}
+            formId="add-task-form"
+          />
         </FormProvider>
         <DialogFooter>
           <DialogClose
