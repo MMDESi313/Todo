@@ -4,7 +4,7 @@ import { updateTaskStatusAction } from "@/actions/updateTaskStatus.action";
 import { formatTaskDate } from "@/lib/functions/date";
 import { cn } from "@/lib/utils";
 import { Tag as TagType, Task, TaskTag } from "@prisma/client";
-import { Check, Clock, Loader2, X } from "lucide-react";
+import { BadgeQuestionMark, Check, Clock, Loader2, X } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Badge } from "../ui/badge";
@@ -39,6 +39,17 @@ export default function TaskCard({ task }: { task: TaskWithTags }) {
         status === "NOT_DONE" && "border-destructive/20",
       )}
     >
+      {status === "NOT_DONE" && (
+        <span className="text-destructive font-semibold text-xs flex gap-2 border border-destructive/25 px-1 py-1 rounded bg-destructive/10">
+          <X size={16} />
+        </span>
+      )}
+      {status === "DONE" && (
+        <span className="text-primary font-semibold text-xs flex gap-2 border border-primary/25 px-1 py-1 rounded bg-primary/10">
+          <Check size={16} />
+        </span>
+      )}
+
       <div className="flex-1 min-w-0">
         <h3
           className={cn(
@@ -84,19 +95,6 @@ export default function TaskCard({ task }: { task: TaskWithTags }) {
       >
         {PRIORITY_LABELS[task.priority]}
       </span>
-
-      {status === "NOT_DONE" && (
-        <span className="text-destructive font-semibold text-xs flex gap-2 border border-destructive/25 px-2 py-1 rounded bg-destructive/10">
-          انجام نشد
-          <X size={16} />
-        </span>
-      )}
-      {status === "DONE" && (
-        <span className="text-primary font-semibold text-xs flex gap-2 border border-primary/25 px-2 py-1 rounded bg-primary/10">
-          انجام شد
-          <Check size={16} />
-        </span>
-      )}
 
       {isOverdue &&
         (isPending ? (
