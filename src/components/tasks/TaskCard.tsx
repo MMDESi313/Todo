@@ -4,7 +4,7 @@ import { updateTaskStatusAction } from "@/actions/updateTaskStatus.action";
 import { formatTaskDate } from "@/lib/functions/date";
 import { cn } from "@/lib/utils";
 import { Tag as TagType, Task, TaskTag } from "@prisma/client";
-import { BadgeQuestionMark, Check, Clock, Loader2, X } from "lucide-react";
+import { Check, Clock, Loader2, X } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Badge } from "../ui/badge";
