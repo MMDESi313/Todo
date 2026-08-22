@@ -11,9 +11,11 @@ type TaskWithTags = Task & { tags: (TaskTag & { tag: Tag })[] };
 export default function TasksList({
   tasks,
   tags,
+  hasAnyTasksEver,
 }: {
   tasks: TaskWithTags[];
   tags: Tag[];
+  hasAnyTasksEver: boolean;
 }) {
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState<StatusFilter>("ALL");
@@ -29,7 +31,7 @@ export default function TasksList({
     });
   }, [tasks, status, priority, search]);
 
-  if (tasks.length === 0) {
+  if (!hasAnyTasksEver) {
     return <EmptyTasksState />;
   }
 
@@ -43,7 +45,11 @@ export default function TasksList({
         priority={priority}
         onPriorityChange={setPriority}
       />
-      {filteredTasks.length === 0 ? (
+      {tasks.length === 0 ? (
+        <p className="text-muted-foreground text-center py-12 text-sm">
+          برای این روز وظیفه‌ای ثبت نشده است
+        </p>
+      ) : filteredTasks.length === 0 ? (
         <p className="text-muted-foreground text-center py-12 text-sm">
           هیچ وظیفه‌ای با این فیلترها پیدا نشد
         </p>
