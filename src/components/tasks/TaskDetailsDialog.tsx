@@ -1,6 +1,6 @@
 "use client";
 
-import { Edit, Trash2 } from "lucide-react";
+import { Calendar, Edit, Trash2 } from "lucide-react";
 import { Tag, Task, TaskTag } from "@prisma/client";
 import {
   Dialog,
@@ -10,6 +10,9 @@ import {
   DialogDescription,
 } from "../ui/dialog";
 import { formatTaskDate } from "@/lib/functions/date";
+import { toPersianDigits } from "@/lib/functions/toPersianDigits";
+import { Separator } from "../ui/separator";
+import { cn } from "@/lib/utils";
 
 type TaskWithTags = Task & { tags: (TaskTag & { tag: Tag })[] };
 const STATUS_LABELS = {
@@ -37,13 +40,20 @@ export default function TaskDetailDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{task.title}</DialogTitle>
           <DialogDescription>جزئیات وظیفه</DialogDescription>
+          <DialogTitle className="text-xl">{task.title}</DialogTitle>
         </DialogHeader>
-
+        <Separator />
         <div className="space-y-4">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xs font-semibold px-2.5 py-1 rounded-full border border-border text-muted-foreground">
+            <span
+              className={cn(
+                "text-xs font-semibold px-2.5 py-1 rounded-full border border-border text-muted-foreground",
+                task.status === "DONE" && "text-primary border-primary",
+                task.status === "NOT_DONE" &&
+                  "text-destructive border-destructive",
+              )}
+            >
               {STATUS_LABELS[task.status]}
             </span>
             <span
@@ -69,11 +79,12 @@ export default function TaskDetailDialog({
           )}
 
           <div>
-            <h4 className="text-xs font-semibold text-muted-foreground mb-1">
-              سررسید
+            <h4 className="text-xs font-semibold text-muted-foreground mb-1 flex gap-1">
+              <Calendar size={14} />
+              تاریخ و زمان انجام
             </h4>
             <p className="text-sm text-foreground">
-              {formatTaskDate(task.dueAt)}
+              {toPersianDigits(formatTaskDate(task.dueAt))}
             </p>
           </div>
 

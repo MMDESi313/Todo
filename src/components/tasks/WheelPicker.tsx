@@ -27,12 +27,19 @@ export default function WheelPicker({
     const idx = items.indexOf(value);
     const el = containerRef.current;
     if (idx === -1 || !el) return;
+
     isProgrammatic.current = true;
-    el.scrollTo({ top: idx * ITEM_HEIGHT, behavior: "smooth" }); // ← smooth شد
-    const t = setTimeout(() => {
-      isProgrammatic.current = false;
-    }, 300);
-    return () => clearTimeout(t);
+
+    const raf = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        el.scrollTo({ top: idx * ITEM_HEIGHT, behavior: "auto" });
+        setTimeout(() => {
+          isProgrammatic.current = false;
+        }, 50);
+      });
+    });
+
+    return () => cancelAnimationFrame(raf);
   }, [value, items]);
 
   const handleScroll = useCallback(() => {

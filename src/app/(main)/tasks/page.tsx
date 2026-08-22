@@ -20,7 +20,7 @@ export default async function TasksPage() {
       ) : (
         <div className="space-y-3">
           {tasks.map((task) => (
-            <TaskCard key={task.id} task={task} />
+            <TaskCard key={task.id} task={task} tags={tags} />
           ))}
         </div>
       )}
