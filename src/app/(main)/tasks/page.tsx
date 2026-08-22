@@ -1,6 +1,5 @@
-import EmptyTasksState from "@/components/tasks/EmptyTasksState";
-import TaskCard from "@/components/tasks/TaskCard";
 import TasksHead from "@/components/tasks/TasksHead";
+import TasksList from "@/components/tasks/TasksList";
 import { getCurrentUser } from "@/lib/auth/session";
 import getUserTags from "@/lib/tags";
 import { getUserTasks } from "@/lib/tasks";
@@ -15,15 +14,7 @@ export default async function TasksPage() {
   return (
     <div className="max-w-5xl mx-auto h-full">
       <TasksHead tags={tags} />
-      {tasks.length === 0 ? (
-        <EmptyTasksState />
-      ) : (
-        <div className="space-y-3">
-          {tasks.map((task) => (
-            <TaskCard key={task.id} task={task} tags={tags} />
-          ))}
-        </div>
-      )}
+      <TasksList tags={tags} tasks={tasks} />
     </div>
   );
 }
