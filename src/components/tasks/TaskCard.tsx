@@ -19,9 +19,15 @@ const PRIORITY_LABELS = { LOW: "کم", MEDIUM: "متوسط", HIGH: "زیاد" } 
 export default function TaskCard({
   task: initialTask,
   tags,
+  className,
+  showTags,
+  canShowDetails = true,
 }: {
   task: TaskWithTags;
   tags: TagType[];
+  className?: string;
+  showTags?: boolean;
+  canShowDetails?: boolean;
 }) {
   const [task, setTask] = useState(initialTask);
   const [isPending, setIsPending] = useState(false);
@@ -50,15 +56,17 @@ export default function TaskCard({
           "bg-card border border-border rounded-xl p-4 flex items-center gap-3 shadow-sm",
           task.status === "DONE" && "border-primary/20",
           task.status === "NOT_DONE" && "border-destructive/20",
+          className,
         )}
       >
         <div className="flex-1 min-w-0">
           <h3
-            onClick={() => setDetailOpen(true)}
+            onClick={() => (canShowDetails ? setDetailOpen(true) : () => {})}
             className={cn(
-              "w-fit text-sm font-semibold text-foreground cursor-pointer",
+              "w-fit text-sm font-semibold text-foreground",
               task.status === "DONE" && "line-through text-primary/80",
               task.status === "NOT_DONE" && "line-through text-destructive/80",
+              canShowDetails && "cursor-pointer",
             )}
           >
             {task.title}
@@ -74,17 +82,18 @@ export default function TaskCard({
               {toPersianDigits(formatTaskDate(task.dueAt))}
             </span>
             <div className="flex items-center gap-2 flex-wrap">
-              {task.tags.map(({ tag }) => (
-                <Badge
-                  key={tag.id}
-                  style={{
-                    backgroundColor: `var(--tag-${tag.color}-bg)`,
-                    color: `var(--tag-${tag.color})`,
-                  }}
-                >
-                  {tag.name}
-                </Badge>
-              ))}
+              {showTags &&
+                task.tags.map(({ tag }) => (
+                  <Badge
+                    key={tag.id}
+                    style={{
+                      backgroundColor: `var(--tag-${tag.color}-bg)`,
+                      color: `var(--tag-${tag.color})`,
+                    }}
+                  >
+                    {tag.name}
+                  </Badge>
+                ))}
             </div>
           </div>
         </div>
@@ -170,31 +179,33 @@ export default function TaskCard({
           ))}
       </div>
 
-      <TaskDetailDialog
-        task={task}
-        open={detailOpen}
-        onOpenChange={setDetailOpen}
-        onEditClick={() => {
-          setDetailOpen(false);
-          setEditOpen(true);
-        }}
-        onDeleteClick={() => {
-          setDetailOpen(false);
-          setDeleteOpen(true);
-        }}
-      />
-      <EditTaskDialog
-        task={task}
-        tags={tags}
-        open={editOpen}
-        onOpenChange={setEditOpen}
-      />
-      <DeleteTaskConfirmation
-        taskId={task.id}
-        open={deleteOpen}
-        onOpenChange={setDeleteOpen}
-        onDeleted={() => setDeleteOpen(false)}
-      />
+      <>
+        <TaskDetailDialog
+          task={task}
+          open={detailOpen}
+          onOpenChange={setDetailOpen}
+          onEditClick={() => {
+            setDetailOpen(false);
+            setEditOpen(true);
+          }}
+          onDeleteClick={() => {
+            setDetailOpen(false);
+            setDeleteOpen(true);
+          }}
+        />
+        <EditTaskDialog
+          task={task}
+          tags={tags}
+          open={editOpen}
+          onOpenChange={setEditOpen}
+        />
+        <DeleteTaskConfirmation
+          taskId={task.id}
+          open={deleteOpen}
+          onOpenChange={setDeleteOpen}
+          onDeleted={() => setDeleteOpen(false)}
+        />
+      </>
     </>
   );
 }

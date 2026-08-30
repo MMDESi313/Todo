@@ -31,12 +31,23 @@ export async function getTodayStats(userId: string) {
 
 export async function getUpcomingTasksToday(userId: string, limit = 3) {
   const { start, end } = getIranDayRange(new Date());
-  return await prisma.task.findMany({
-    where: { userId: userId, status: "TODO", dueAt: { gte: start, lte: end } },
-    include: { tags: { include: { tag: true } } },
-    orderBy: { dueAt: "asc" },
-    take: limit,
-  });
+  const where = {
+    userId,
+    status: "TODO" as const,
+    dueAt: { gte: start, lte: end },
+  };
+
+  const [tasks, total] = await Promise.all([
+    prisma.task.findMany({
+      where,
+      include: { tags: { include: { tag: true } } },
+      orderBy: { dueAt: "asc" },
+      take: limit,
+    }),
+    prisma.task.count({ where }),
+  ]);
+
+  return { tasks, total };
 }
 
 export async function getOverdueTasks(userId: string, limit = 3) {
@@ -88,7 +99,7 @@ export async function getLast7DaysStats(userId: string) {
   return days;
 }
 
-export async function getAllTimeState(userId: string) {
+export async function getAllTimeStats(userId: string) {
   const grouped = await prisma.task.groupBy({
     by: ["status"],
     where: { userId },
