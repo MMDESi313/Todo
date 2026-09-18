@@ -9,7 +9,7 @@ export default async function MainLayout({ children }: LayoutProps<"/">) {
   return (
     <>
       <Header />
-      <main className="p-4 md:p-8">{children}</main>
+      <main className="pb-18 md:pb-0 p-4 md:p-8">{children}</main>
       <MobileNav />
     </>
   );
