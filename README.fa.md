@@ -26,9 +26,6 @@
   <strong><a href="https://todo-pied-gamma.vercel.app/">🔗 دموی زنده</a></strong>
 </p>
 
-<!-- هروقت اسکرین‌شات یا گیف داشتی، اینجا اضافه کن، مثلاً: -->
-<!-- ![اسکرین‌شات داشبورد](./screenshots/dashboard.png) -->
-
 ---
 
 ## فهرست مطالب

@@ -26,9 +26,6 @@ a manual session-based auth system, and a fully custom analytics dashboard — n
   <strong><a href="https://todo-pied-gamma.vercel.app/">🔗 Live Demo</a></strong>
 </p>
 
-<!-- Add a screenshot or GIF once you have one, e.g.: -->
-<!-- ![Dashboard screenshot](./screenshots/dashboard.png) -->
-
 ---
 
 ## Table of Contents
